@@ -9,13 +9,13 @@ namespace Microsoft.DotNet.Cli.Build
 {
     public class Monikers
     {
-        public const string SharedFrameworkName = "Microsoft.NETCore.App";
-        public const string CLISdkBrandName = "Microsoft .NET Core 1.0.0 - SDK Preview 2";
+        public const string SharedFrameworkName = "Microsoft.AspNetCore";
+        public const string CLISdkBrandName = "Microsoft AspNet Core 1.1.0 - Preview1";
 
         private static string GetBrandName(BuildTargetContext c, string suffix)
         {
             var buildVersion = c.BuildContext.Get<BuildVersion>("BuildVersion");
-            return String.Format("Microsoft .NET Core {0}.{1}.{2} - {3}", buildVersion.Major, 
+            return String.Format("Microsoft AspNet Core {0}.{1}.{2} - {3}", buildVersion.Major, 
             buildVersion.Minor, buildVersion.Patch, suffix);
         }
         public static string GetSharedFxBrandName(BuildTargetContext c)
@@ -75,7 +75,7 @@ namespace Microsoft.DotNet.Cli.Build
 
         public static string GetDebianSharedFrameworkPackageName(string sharedFrameworkNugetVersion)
         {
-            return $"dotnet-sharedframework-{SharedFrameworkName}-{sharedFrameworkNugetVersion}".ToLower();
+            return $"aspnetcore-sharedframework-{SharedFrameworkName}-{sharedFrameworkNugetVersion}".ToLower();
         }
 
         public static string GetDebianSharedHostPackageName(BuildTargetContext c)

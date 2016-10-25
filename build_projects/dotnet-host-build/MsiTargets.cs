@@ -92,8 +92,8 @@ namespace Microsoft.DotNet.Host.Build
         }
 
         [Target(nameof(MsiTargets.InitMsi),
-        nameof(GenerateDotnetSharedHostMsi),
-        nameof(GenerateDotnetHostFxrMsi),
+        //nameof(GenerateDotnetSharedHostMsi),
+        //nameof(GenerateDotnetHostFxrMsi),
         nameof(GenerateDotnetSharedFrameworkMsi))]
         [BuildPlatforms(BuildPlatform.Windows)]
         public static BuildTargetResult GenerateMsis(BuildTargetContext c)

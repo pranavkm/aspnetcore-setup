@@ -15,7 +15,7 @@ namespace Microsoft.DotNet.Cli.Build
 {
     public class SharedFrameworkPublisher
     {
-        public static string s_sharedFrameworkName = "Microsoft.NETCore.App";
+        public static string s_sharedFrameworkName = "Microsoft.AspNetCore";
 
         private string _sharedFrameworkTemplateSourceRoot;
         private string _sharedFrameworkNugetVersion;
@@ -90,8 +90,7 @@ namespace Microsoft.DotNet.Cli.Build
             dotnetCli.Restore(
                 "--verbosity", "verbose",
                 "--disable-parallel",
-                "--infer-runtimes",
-                "--fallbacksource", _corehostPackageSource)
+                "--infer-runtimes")
                 .WorkingDirectory(_sharedFrameworkSourceRoot)
                 .Execute()
                 .EnsureSuccessful();
@@ -125,7 +124,7 @@ namespace Microsoft.DotNet.Cli.Build
             // Generate RID fallback graph
             GenerateRuntimeGraph(dotnetCli, destinationDeps);
 
-            CopyHostArtifactsToSharedFramework(sharedFrameworkNameAndVersionRoot, hostFxrVersion);
+            //CopyHostArtifactsToSharedFramework(sharedFrameworkNameAndVersionRoot, hostFxrVersion);
 
             _crossgenUtil.CrossgenDirectory(sharedFrameworkNameAndVersionRoot, sharedFrameworkNameAndVersionRoot);
 

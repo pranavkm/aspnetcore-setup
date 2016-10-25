@@ -21,7 +21,7 @@ namespace Microsoft.DotNet.Host.Build
         [Target(nameof(Init))]
         public static BuildTargetResult Prepare(BuildTargetContext c) => c.Success();
 
-        [Target(nameof(CheckPrereqCmakePresent), nameof(CheckPlatformDependencies))]
+        [Target(nameof(CheckPlatformDependencies))]
         public static BuildTargetResult CheckPrereqs(BuildTargetContext c) => c.Success();
 
         [Target(nameof(CheckCoreclrPlatformDependencies))]
@@ -202,7 +202,7 @@ namespace Microsoft.DotNet.Host.Build
 
             AddInstallerArtifactToContext(c, "dotnet-host", "SharedHost", hostVersion);
             AddInstallerArtifactToContext(c, "dotnet-hostfxr", "HostFxr", hostFxrVersion);
-            AddInstallerArtifactToContext(c, "dotnet-sharedframework", "SharedFramework", sharedFrameworkVersion);
+            AddInstallerArtifactToContext(c, "aspnetcore-sharedframework", "SharedFramework", sharedFrameworkVersion);
             AddInstallerArtifactToContext(c, "dotnet", "CombinedMuxerHostFxrFramework", sharedFrameworkVersion);
 
             return c.Success();
@@ -319,38 +319,6 @@ namespace Microsoft.DotNet.Host.Build
                 .Execute()
                 .EnsureSuccessful();
                 
-            return c.Success();
-        }
-
-        [Target]
-        public static BuildTargetResult CheckPrereqCmakePresent(BuildTargetContext c)
-        {
-            try
-            {
-                Command.Create("cmake", "--version")
-                    .CaptureStdOut()
-                    .CaptureStdErr()
-                    .Execute();
-            }
-            catch (Exception ex)
-            {
-                string message = $@"Error running cmake: {ex.Message}
-cmake is required to build the native host 'corehost'";
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    message += Environment.NewLine + "Download it from https://www.cmake.org";
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    message += Environment.NewLine + "Ubuntu: 'sudo apt-get install cmake'";
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    message += Environment.NewLine + "OS X w/Homebrew: 'brew install cmake'";
-                }
-                return c.Failed(message);
-            }
-
             return c.Success();
         }
     }

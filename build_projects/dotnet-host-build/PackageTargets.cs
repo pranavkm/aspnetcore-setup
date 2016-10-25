@@ -20,23 +20,25 @@ namespace Microsoft.DotNet.Host.Build
         };
 
         [Target(
-            nameof(PackageTargets.CopySharedHostLayout),
-            nameof(PackageTargets.CopyHostFxrLayout),
-            nameof(PackageTargets.CopySharedFxLayout),
-            nameof(PackageTargets.CopyCombinedMuxerHostFxrFrameworkLayout))]
+            //nameof(PackageTargets.CopySharedHostLayout),
+            //nameof(PackageTargets.CopyHostFxrLayout),
+            nameof(PackageTargets.CopySharedFxLayout)
+            /*nameof(PackageTargets.CopyCombinedMuxerHostFxrFrameworkLayout)*/)]
         public static BuildTargetResult InitPackage(BuildTargetContext c)
         {
             Directory.CreateDirectory(Dirs.Packages);
             return c.Success();
         }
 
-        [Target(nameof(PrepareTargets.Init),
+        [Target(
+            nameof(PrepareTargets.Init),
             nameof(PackageTargets.InitPackage),
-            nameof(PackageTargets.GenerateVersionBadge),
+            //nameof(PackageTargets.GenerateVersionBadge),
             nameof(PackageTargets.GenerateCompressedFile),
-            nameof(InstallerTargets.GenerateInstaller),
-            nameof(PackageTargets.GenerateNugetPackages),
-            nameof(InstallerTargets.TestInstaller))]
+            nameof(InstallerTargets.GenerateInstaller)
+            //nameof(PackageTargets.GenerateNugetPackages),
+            //nameof(InstallerTargets.TestInstaller)
+            )]
         [Environment("DOTNET_BUILD_SKIP_PACKAGING", null, "0", "false")]
         public static BuildTargetResult Package(BuildTargetContext c)
         {
@@ -159,13 +161,13 @@ namespace Microsoft.DotNet.Host.Build
         [BuildPlatforms(BuildPlatform.Windows)]
         public static BuildTargetResult GenerateZip(BuildTargetContext c)
         {
-            CreateZipFromDirectory(
-                c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkPublishRoot"), 
-                c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkCompressedFile"));
+            //CreateZipFromDirectory(
+            //    c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkPublishRoot"), 
+            //    c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkCompressedFile"));
 
-            CreateZipFromDirectory(
-                c.BuildContext.Get<string>("HostFxrPublishRoot"), 
-                c.BuildContext.Get<string>("HostFxrCompressedFile"));
+            //CreateZipFromDirectory(
+            //    c.BuildContext.Get<string>("HostFxrPublishRoot"), 
+            //    c.BuildContext.Get<string>("HostFxrCompressedFile"));
             
             CreateZipFromDirectory(
                 c.BuildContext.Get<string>("SharedFrameworkPublishRoot"), 
@@ -177,13 +179,13 @@ namespace Microsoft.DotNet.Host.Build
         [BuildPlatforms(BuildPlatform.Unix)]
         public static BuildTargetResult GenerateTarBall(BuildTargetContext c)
         {
-            CreateTarBallFromDirectory(
-                c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkPublishRoot"), 
-                c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkCompressedFile"));
+            //CreateTarBallFromDirectory(
+            //    c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkPublishRoot"), 
+            //    c.BuildContext.Get<string>("CombinedMuxerHostFxrFrameworkCompressedFile"));
 
-            CreateTarBallFromDirectory(
-                c.BuildContext.Get<string>("HostFxrPublishRoot"), 
-                c.BuildContext.Get<string>("HostFxrCompressedFile"));
+            //CreateTarBallFromDirectory(
+            //    c.BuildContext.Get<string>("HostFxrPublishRoot"), 
+            //    c.BuildContext.Get<string>("HostFxrCompressedFile"));
 
             CreateTarBallFromDirectory(
                 c.BuildContext.Get<string>("SharedFrameworkPublishRoot"), 

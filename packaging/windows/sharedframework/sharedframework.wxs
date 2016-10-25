@@ -11,7 +11,7 @@
         <Feature Id="MainFeature" Title="Main Feature" Level="1">
             <ComponentGroupRef Id="InstallFiles" />
             <ComponentGroupRef Id="AuthoredRegistryKeys"/>
-            <Component Id="BreadcrumbStoreFolder" Directory="BreadcrumbStore" Guid="{DA957490-EA59-42B9-B9D6-3E80F6FB0ED0}">
+            <Component Id="BreadcrumbStoreFolder" Directory="BreadcrumbStore" Guid="{96522BB8-DE45-413D-BA4E-D6B1466EC863}">
                 <CreateFolder Directory="BreadcrumbStore">
                     <Permission
                         User="Everyone"
