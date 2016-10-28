@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:dep="http://schemas.microsoft.com/wix/DependencyExtension">
-  <?include "Variables.wxi" ?>
-  <Fragment>
-    <Component Id="$(var.DependencyKeyId)" Directory="TARGETDIR" Win64="no" Guid="B97A45DF-E6F4-43E8-8A21-C23C962F8D70">
-      <dep:Provides Key="$(var.DependencyKey)" />
-    </Component>
-  </Fragment>
-</Wix>

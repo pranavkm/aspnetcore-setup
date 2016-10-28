@@ -5,7 +5,6 @@
   },
   "dependencies": {
     "Microsoft.AspNetCore": "1.1.0-preview1-final",
-    "Microsoft.NETCore.App": "1.1.0-preview1-001100-00"
   },
   "runtimes": {
     "$(RID)": {}
